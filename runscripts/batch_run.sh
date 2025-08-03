@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # add path of the root folder
-export PYTHONPATH=/home/codelab/work/benchmarks:$PYTHONPATH
+export PYTHONPATH=/home/name/snbo:$PYTHONPATH
 
 # variables
 method="snbo"
