@@ -1,10 +1,14 @@
 ## 📌 Overview
 
-This repository implements Scalable Neural Network-based Blackbox Optimization (SNBO) — a novel method for high-dimensional and computationally efficient blackbox optimization using neural networks.
+This repository implements Scalable Neural Network-based Blackbox Optimization (SNBO) — a novel 
+method for efficient blackbox optimization using neural networks. This repository also includes code
+for various benchmark methods used for evaluating the SNBO.
+
+This work is currently under review and will be available soon.
 
 ## 🛠 Installation
 
-Before running SNBO, you need to set up the environment and install the required packages.
+Before running SNBO or any of the benchmark methods, you need to set up the environment and install the dependencies.
 
 ### 🐍 1. Create a conda environment
 
@@ -21,13 +25,8 @@ pip install numpy==2.3.1 scipy==1.16.0 matplotlib==3.10.3 torch==2.7.1
 gpytorch==1.14 botorch==0.14.0 gymnasium["mujoco"]==1.2.0
 ```
 
-Or install all dependencies from the requirements file:
-
-```
-pip install -r requirements.txt
-```
-
-You may also need to install DYCORS. To do that, download the [DYCORS repository](https://github.com/aquirosr/DyCors) repository and run:
+If you want to use DYCORS for running a test case, then please install it by downloading the 
+[DYCORS repository](https://github.com/aquirosr/DyCors) and running following command in terminal:
 
 ```
 pip install .
@@ -35,13 +34,26 @@ pip install .
 
 ## ▶️ Running Examples
 
-To run a test optimization using SNBO or one of the baseline methods, you can run runscript.sh
+Before running any of the runscripts, you need to append the path of the
+root folder to `PYTHONPATH`. The command for this is already available at the top of all the script files in the runscript folder.
+
+Open the script file and ensure that the correct path is mentioned.
+
+To solve a test problem using SNBO or any of the benchmark methods, you can use ``single_run.sh`` file under runscripts folder. To execute the file, run:
 
 ```
-sh runscript.sh
+sh runscripts/single_run.sh
 ```
 
-Before running this file, include the path to the repository at the top of the runscript.sh file. This ensure that the SNBO repository is correctly included in your Python path.
+If you want to run a batch of optimization, you can use ``batch_run.sh`` file under runscripts folder. To execute the file, run:
+
+```
+sh runscripts/batch_run.sh
+```
+
+When you execute any of the above commands, it will create a folder name ``results`` and will save the entire optimization history in a mat file.
+
+> 💡 **_NOTE:_** It is recommended to run the bash file or `optimize.py` file from the root folder and NOT from within the subfolder.
 
 ## 	🧾 Citation
 
