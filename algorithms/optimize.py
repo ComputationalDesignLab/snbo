@@ -1,12 +1,11 @@
 # Script for optimizing a given problem using a specific method, Note: this assumes maximization problem
 
 import argparse, os
-from algorithms import *
-from DyCors import minimize
 from test_problems.problem import TestProblem
 import numpy as np
 from scipy.io import savemat
 from time import time
+from utils import set_seed, latin_hypercube
 
 parser = argparse.ArgumentParser(description='Runscript for running BO algorithm')
 
@@ -66,6 +65,8 @@ if seed is not None:
 
 if method == "bo":
 
+    from algorithms.bo import BO
+
     optimizer = BO(
         f=f,
         lb=f.lb,
@@ -75,6 +76,8 @@ if method == "bo":
     )
     
 elif method == "ibnn":
+
+    from algorithms.ibnn import IBNN
 
     optimizer = IBNN(
         f=f,
@@ -86,6 +89,8 @@ elif method == "ibnn":
 
 elif method == "turbo":
 
+    from turbo import Turbo
+
     optimizer = Turbo(
         f=f,
         lb=f.lb,
@@ -95,6 +100,8 @@ elif method == "turbo":
     )
 
 elif method == "dycors":
+
+    from DyCors import minimize
 
     # options for dycors - from original source code
     options  = {
@@ -115,6 +122,8 @@ elif method == "dycors":
     x0 = latin_hypercube(n_init, f.dim)
 
 elif method == "snbo":
+
+    from snbo import SNBO
 
     optimizer = SNBO(
         f=f,
