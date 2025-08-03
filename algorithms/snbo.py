@@ -3,7 +3,7 @@
 import torch
 import numpy as np
 from time import time
-from .utils import latin_hypercube
+from utils import latin_hypercube
 
 class SNBO:
 
@@ -353,12 +353,7 @@ def train(model, xtrain, ytrain, epochs, lr, tol=1e-2):
         loss = loss_fn(ypred, ytrain)
 
         if torch.sqrt(loss) / ptp(ytrain, 0) < tol:
-            print("Epoch {}, Training loss: {}".format(epoch+1, loss.item()))
             break
-
-        # Print the loss
-        if (epoch+1) % 1000 == 0:
-            print('Epoch: ', epoch, 'Loss: ', loss.item())
 
         # Backward pass
         loss.backward()

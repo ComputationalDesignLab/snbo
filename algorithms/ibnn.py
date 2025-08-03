@@ -22,7 +22,7 @@ from botorch.models.transforms.outcome import Standardize
 from botorch.generation import MaxPosteriorSampling
 from botorch.sampling.stochastic_samplers import StochasticSampler
 
-from .utils import latin_hypercube
+from utils import latin_hypercube
 
 warnings.filterwarnings('ignore')
 

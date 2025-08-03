@@ -6,7 +6,7 @@ import gpytorch, torch, math
 import numpy as np
 from copy import deepcopy
 from time import time
-from .utils import latin_hypercube
+from utils import latin_hypercube
 
 from gpytorch.models import ExactGP
 from gpytorch.means import ConstantMean

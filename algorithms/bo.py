@@ -16,7 +16,7 @@ from botorch.fit import fit_gpytorch_mll
 from botorch.models.transforms.outcome import Standardize
 from botorch.generation import MaxPosteriorSampling
 
-from .utils import latin_hypercube
+from utils import latin_hypercube
 
 class BO:
 
