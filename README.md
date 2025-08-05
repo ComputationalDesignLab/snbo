@@ -95,9 +95,11 @@ If you want to run a batch of optimization, you can use ``batch_run.sh`` file un
 bash runscripts/batch_run.sh
 ```
 
-When you execute any of the above commands, it will create a folder name ``results`` and will save the entire optimization history in a mat file.
-
 > ⚠️ **_NOTE:_** It is recommended to run the python or the bash file from the root folder and NOT from within the subfolder.
+
+When you either run the `optimize.py` file or any of the scripts, a folder named ``results`` will be created that consists of 
+different subfolders, depending on the problem you are solving and the method you selected. A mat file will be saved within appropriate
+subfoler that contains entire optimization history.
 
 ## 📊 Results from paper
 
