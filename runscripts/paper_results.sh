@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Replace 'PATH_TO_SNBO' with the path to your SNBO project
-export PYTHONPATH=PATH_TO_SNBO:$PYTHONPATH
+# Replace 'PATH_TO_SNBO_FOLDER' with the path to your SNBO project
+export PYTHONPATH=PATH_TO_SNBO_FOLDER:$PYTHONPATH
 
 methods=("bo" "ibnn" "turbo" "dycors" "snbo")
 

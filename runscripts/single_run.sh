@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# add path of the root folder
-export PYTHONPATH=/home/name/snbo:$PYTHONPATH
+# Replace 'PATH_TO_SNBO_FOLDER' with the path to your SNBO project
+export PYTHONPATH=PATH_TO_SNBO_FOLDER:$PYTHONPATH
 
 # variables
 problem="rover"
