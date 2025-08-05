@@ -15,10 +15,8 @@ parser.add_argument("--problem", type=str, help="name of the optimization proble
 parser.add_argument("--dim", type=int, help="number of dimensions")
 parser.add_argument("--n_init", type=int, help="initial number of samples")
 parser.add_argument("--max_evals", type=int, help="maximum number of function evaluations")
-parser.add_argument("--neurons", nargs='+', type=int, default=[256, 256],
-                    help="list of int representing neurons in each layer, only for EBONN")
-parser.add_argument("--act_funcs", nargs='+', type=str, default=["GELU", "GELU"], 
-                    help="list of str representing activation function in each layer, only for EBONN")
+parser.add_argument("--neurons", nargs='+', type=int, help="list of int representing neurons in each layer, only for EBONN")
+parser.add_argument("--act_funcs", nargs='+', type=str, help="list of str representing activation function in each layer, only for EBONN")
 parser.add_argument("--seed", type=int, default=None, help="seed for the run")
 
 args = parser.parse_args()
