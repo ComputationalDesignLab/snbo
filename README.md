@@ -2,11 +2,11 @@
 
 This repository provides implementation for SNBO (Scalable Neural Network-based Blackbox Optimization) — a novel method for efficient blackbox optimization using neural networks. It also includes code for benchmark algorithms and a suite of test problems used in the paper.
 
-📝 **Note**: This work is currently under review. Citation details will be available soon.
+> 📝 **Note**: This work is currently under review. Citation details will be available soon.
 
 ## 📌 Features
 
-This repository includes implementations for the following optimization algorithms:
+This repository includes implementation for the following optimization algorithms:
 
 - `SNBO`: Scalable neural network-based blackbox optimization (proposed method)
 - `BO+LogEI`: [Bayesian optimization with LogEI acquisition](https://arxiv.org/abs/2310.20708)
