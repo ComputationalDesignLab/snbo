@@ -52,6 +52,8 @@ pip install .
 
 ## ▶️ Running examples
 
+> 📥 Important: Before running any example, download the latest released or tagged version of this repository from the [releases page](https://github.com/ComputationalDesignLab/snbo/releases).
+
 The main file for running experiments is `optimize.py`, found in algorithms folder. This file provides following arguments:
 
 | Argument    | Type | Description                                                                   |
