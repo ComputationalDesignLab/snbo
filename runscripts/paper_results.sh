@@ -10,6 +10,7 @@ methods=("bo" "ibnn" "turbo" "dycors" "snbo")
 dims=(10 25 50)
 max_evals=(500 1000 1000)
 problems=("ackley" "rastrigin" "levy")
+neurons=(128 256 256)
 
 for seed in $(seq 1 10); do
     for dim_idx in "${!dims[@]}"; do
@@ -17,11 +18,12 @@ for seed in $(seq 1 10); do
         dim=${dims[$dim_idx]}
         n_init=$((2*$dim))
         max_eval=${max_evals[$dim_idx]}
+        neuron=${neurons[$dim_idx]}
 
         for prob_idx in "${!problems[@]}"; do
             for method_idx in "${!methods[@]}"; do
                 python algorithms/optimize.py --method ${methods[$method_idx]} --problem ${problems[$prob_idx]} --dim $dim --n_init $n_init\
-                    --max_evals $max_eval --seed $seed --neurons 128 128 --act_funcs "GELU" "GELU"
+                    --max_evals $max_eval --seed $seed --neurons $neuron $neuron --act_funcs "GELU" "GELU"
             done
         done
         
