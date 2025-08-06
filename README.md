@@ -76,12 +76,10 @@ python algorithms/optimize.py --method "snbo" --problem "rover" --dim 100 --n_in
 ```
 
 > ⚠️ ***NOTE***: Before running the file, you need to append the path of the root folder to `PYTHONPATH` variable.  This can be done by running following command in the terminal before running the python file:
-
-```
-export PYTHONPATH=PATH_TO_SNBO_FOLDER:$PYTHONPATH
-```
-
-Or, you can add this line to your shell configuration file (`.bashrc` or`.zshrc`) and reload the terminal.
+>   ```
+>   export PYTHONPATH=PATH_TO_SNBO_FOLDER:$PYTHONPATH
+>   ```
+>   Or, you can add this line to your shell configuration file (`.bashrc` or`.zshrc`) and reload the terminal.
 
 ✅ Option 2 (**Recommended**): Instead of directly running the `optimize.py` file, you can use one of the ready-to-use scripts available in runscript folder. These scripts already include the `export` statement requried for appending the `PYTHONPATH` variable at the start of the script, you just need to ensure that correct path is defined.
 
