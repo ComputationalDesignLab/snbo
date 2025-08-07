@@ -2,7 +2,7 @@
 
 This repository provides implementation for SNBO (Scalable Neural Network-based Blackbox Optimization) — a novel method for efficient blackbox optimization using neural networks. It also includes code for benchmark algorithms and a suite of test problems used in the paper.
 
-> 📝 **Note**: This work is currently under review. Citation details will be available soon.
+> 📝 **Note**: This work is currently under review but a preprint version is available at: https://arxiv.org/abs/2508.03827
 
 ## 📌 Features
 
@@ -97,7 +97,7 @@ bash runscripts/batch_run.sh
 
 > ⚠️ **_NOTE:_** It is recommended to run the python or the bash file from the root folder and NOT from within the subfolder.
 
-When you either run the `optimize.py` file or any of the scripts, a folder named ``results`` will be created that consists of 
+When you run the `optimize.py` file or any of the bash script, a folder named ``results`` will be created that consists of 
 different subfolders, depending on the problem you are solving and the method you selected. A mat file will be saved within appropriate
 subfoler that contains entire optimization history.
 
