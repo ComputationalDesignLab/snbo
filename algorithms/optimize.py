@@ -3,7 +3,7 @@
 import argparse, os
 from test_problems.problem import TestProblem
 import numpy as np
-from scipy.io import savemat
+from scipy.io import savemat, loadmat
 from time import time
 from utils import set_seed, latin_hypercube
 
@@ -123,6 +123,14 @@ elif method == "snbo":
 
     from snbo import SNBO
 
+    if problem == "wing":
+        data = loadmat(f"wing_problem_files/doe_seed{seed}.mat")
+        initial_x=data["x"]
+        initial_y=data["y"]
+    else:
+        initial_x=None
+        initial_y=None
+
     optimizer = SNBO(
         f=f,
         lb=f.lb,
@@ -130,7 +138,9 @@ elif method == "snbo":
         n_init=n_init,
         max_evals=max_evals,
         neurons=neurons,
-        act_funcs=act_funcs
+        act_funcs=act_funcs,
+        initial_x=initial_x,
+        initial_y=initial_y
     )
 
 ########## solve the optimization problem

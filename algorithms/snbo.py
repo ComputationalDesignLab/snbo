@@ -25,7 +25,9 @@ class SNBO:
         early_stop_tol=1e-3,
         verbose=True,
         device="cuda",
-        dtype="float32"
+        dtype="float32",
+        initial_x=None,
+        initial_y=None
     ):
         """
             Class for setting up and running SNBO algorithm
@@ -66,6 +68,10 @@ class SNBO:
             
             dtype: dtype to use for NN training and inference ("float32" or "float64"), str, default="float32"
 
+            initial_x: 2D numpy array of shape (samples,dim) containing starting doe, np.ndarry, default=None
+
+            initial_y: 2D numpy array of shape (samples,1) containing y values for corresponding initial doe, np.ndarry, default=None
+
             Note: This code assumes you are solving a minimization problem
         """
 
@@ -83,12 +89,19 @@ class SNBO:
         assert max_evals > n_init and max_evals > batch_size
         assert device == "cpu" or device == "cuda"
         assert dtype == "float32" or dtype == "float64"
+        if initial_x is not None or initial_y is not None:
+            assert isinstance(initial_x,np.ndarray) and initial_x.ndim == 2
+            assert isinstance(initial_y,np.ndarray) and initial_y.ndim == 2
+            assert initial_x.shape[0] == initial_y.shape[0]
+            assert initial_y.shape[1] == 1
 
         # Save objective function information
         self.f = f
         self.dim = len(lb)
         self.lb = lb
         self.ub = ub
+        self.initial_x = initial_x
+        self.initial_y = initial_y
 
         # Settings
         self.n_init = n_init
@@ -146,8 +159,12 @@ class SNBO:
             succ = 0
 
             # Generate initial samples
-            x = latin_hypercube(self.n_init, self.dim)
-            y = self.f(x)
+            if self.initial_x is None and self.initial_y is None:
+                x = latin_hypercube(self.n_init, self.dim)
+                y = self.f(x)
+            else:
+                x = self.initial_x
+                y = self.initial_y
 
             self.n_evals += self.n_init
 
