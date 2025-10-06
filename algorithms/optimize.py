@@ -50,9 +50,9 @@ dir_name = f'results/{problem}/{method}'
 ########## create test problem
 
 if method in ["bo", "ibnn"]:
-    f = TestProblem(problem, dim, input_norm=True, negate=True)
+    f = TestProblem(problem, dim, input_norm=True, negate=True, seed=seed)
 else:
-    f = TestProblem(problem, dim, input_norm=True, negate=False)
+    f = TestProblem(problem, dim, input_norm=True, negate=False, seed=seed)
 
 ########## set seed
 

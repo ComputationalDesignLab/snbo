@@ -2,10 +2,11 @@ import numpy as np
 from .analytical_problems import *
 from .rover import Rover
 from .mujoco_env import HalfCheetah
+from .wing import Wing
 
 class TestProblem():
 
-    def __init__(self, func_name, dim, input_norm=False, negate=False):
+    def __init__(self, func_name, dim, input_norm=False, negate=False, seed=None):
         """
             Class for defining and evaluating a test problem
 
@@ -23,11 +24,15 @@ class TestProblem():
             
             negate: whether to negate the function value or not, set this to True when
                 optimizer requries a maximization problem, bool, default=False
+
+            seed: value of seed set for the problem (only used in wing problem), int, default=None
         """
 
         assert isinstance(func_name, str), "function name should be a string"
         assert isinstance(dim, int), "dimension should be an integer"
         assert isinstance(input_norm, bool), "input_norm should be a boolean value"
+        if seed is not None:
+            assert isinstance(seed, int), "seed should be an integer value"
 
         if func_name.lower() == "hartmann6d":
             self.func = Hartmann6D()
@@ -47,8 +52,11 @@ class TestProblem():
         elif func_name.lower() == "halfcheetah":
             self.func = HalfCheetah()
 
+        elif func_name.lower() == "wing":
+            self.func = Wing(seed)
+
         else:
-            raise ValueError("Incorrect test function name, possible values are: 'hartmann6d', 'ackley', 'levy', 'rastrigin', 'rover', 'halfcheetah'")
+            raise ValueError("Incorrect test function name, possible values are: 'hartmann6d', 'ackley', 'levy', 'rastrigin', 'rover', 'halfcheetah', 'wing'")
 
         self.input_norm = input_norm
         self.negate = negate
