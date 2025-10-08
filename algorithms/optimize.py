@@ -124,9 +124,9 @@ elif method == "snbo":
     from snbo import SNBO
 
     if problem == "wing":
-        data = loadmat(f"wing_problem_files/doe_seed{seed}.mat")
+        data = loadmat(f"wing_problem_files/initial_data{seed}.mat")
         initial_x=data["x"]
-        initial_y=data["y"]
+        initial_y=data["obj"]
     else:
         initial_x=None
         initial_y=None
