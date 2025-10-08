@@ -10,42 +10,45 @@ methods=("bo" "ibnn" "turbo" "dycors" "snbo")
 dims=(10 25 50)
 max_evals=(500 1000 1000)
 problems=("ackley" "rastrigin" "levy")
-neurons=(128 256 256)
 
 for seed in $(seq 1 10); do
     for dim_idx in "${!dims[@]}"; do
-
         dim=${dims[$dim_idx]}
         n_init=$((2*$dim))
         max_eval=${max_evals[$dim_idx]}
-        neuron=${neurons[$dim_idx]}
-
         for prob_idx in "${!problems[@]}"; do
             for method_idx in "${!methods[@]}"; do
                 python algorithms/optimize.py --method ${methods[$method_idx]} --problem ${problems[$prob_idx]} --dim $dim --n_init $n_init\
-                    --max_evals $max_eval --seed $seed --neurons $neuron $neuron --act_funcs "GELU" "GELU"
+                    --max_evals $max_eval --seed $seed --neurons 256 256 --act_funcs "GELU" "GELU"
             done
         done
-        
     done
 done
 
-############ real-world problems
+############ rover problem
 
-dims=(100 102)
+dim=100
 max_evals=2000
-problems=("rover" "halfcheetah")
+problem="rover"
 
 for seed in $(seq 1 10); do
-    for prob_idx in "${!problems[@]}"; do
+    n_init=$((2*$dim))
+    for method_idx in "${!methods[@]}"; do
+        python algorithms/optimize.py --method ${methods[$method_idx]} --problem $problem --dim $dim\
+            --n_init $n_init --max_evals $max_evals --seed $seed --neurons 256 256 --act_funcs "GELU" "GELU"
+    done
+done
 
-        dim=${dims[$prob_idx]}
-        n_init=$((2*$dim))
+############ halfcheetah problem
 
-        for method_idx in "${!methods[@]}"; do
-            python algorithms/optimize.py --method ${methods[$method_idx]} --problem ${problems[$prob_idx]} --dim $dim\
-                --n_init $n_init --max_evals $max_evals --seed $seed --neurons 256 256 --act_funcs "GELU" "GELU"
-        done
+max_evals=2000
+problem="halfcheetah"
+dim=102
 
+for seed in $(seq 1 10); do
+    n_init=$((2*$dim))
+    for method_idx in "${!methods[@]}"; do
+        python algorithms/optimize.py --method ${methods[$method_idx]} --problem $problem --dim $dim\
+            --n_init $n_init --max_evals $max_evals --seed $seed --neurons 256 256 256 256 --act_funcs "GELU" "GELU" "GELU" "GELU"
     done
 done
