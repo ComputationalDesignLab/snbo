@@ -127,7 +127,7 @@ class Wing():
         obj = output["cd"]
 
         if 1 - output["volume"] > 0:
-            obj += 1 - output["volume"]
+            obj += 0.1*(1 - output["volume"])
 
         obj = np.array([obj])
 
