@@ -33,7 +33,9 @@ class Turbo:
         max_cholesky_size=2000, 
         n_training_steps=100,
         device="cuda",
-        dtype="float64"
+        dtype="float64",
+        initial_x=None,
+        initial_y=None
     ):
         """
             Class for setting up and running the TuRBO-1 algorithm
@@ -68,6 +70,10 @@ class Turbo:
             
             dtype: dtype to use for GP fitting ("float32" or "float64"), str, default="float64"
 
+            initial_x: 2D numpy array of shape (samples,dim) containing starting doe, np.ndarry, default=None
+
+            initial_y: 2D numpy array of shape (samples,1) containing y values for corresponding initial doe, np.ndarry, default=None
+
             Note: This code assumes you are solving a minimization problem
         """
         
@@ -87,12 +93,19 @@ class Turbo:
         assert max_evals > n_init and max_evals > batch_size
         assert device == "cpu" or device == "cuda"
         assert dtype == "float32" or dtype == "float64"
+        if initial_x is not None or initial_y is not None:
+            assert isinstance(initial_x,np.ndarray) and initial_x.ndim == 2
+            assert isinstance(initial_y,np.ndarray) and initial_y.ndim == 2
+            assert initial_x.shape[0] == initial_y.shape[0]
+            assert initial_y.shape[1] == 1
 
         # Save objective function information
         self.f = f
         self.dim = len(lb)
         self.lb = lb
         self.ub = ub
+        self.initial_x = initial_x
+        self.initial_y = initial_y
 
         # Settings
         self.n_init = n_init
@@ -285,9 +298,13 @@ class Turbo:
             # Initialize parameters
             self._restart()
 
-            # Generate and evalute initial design points
-            X_init = latin_hypercube(self.n_init, self.dim)
-            fX_init = self.f(X_init)
+            # Generate initial samples
+            if self.initial_x is None and self.initial_y is None:
+                X_init = latin_hypercube(self.n_init, self.dim)
+                fX_init = self.f(X_init)
+            else:
+                X_init = self.initial_x
+                fX_init = self.initial_y
     
             # Update budget 
             self.n_evals += self.n_init
