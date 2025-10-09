@@ -32,7 +32,9 @@ act_funcs = args.act_funcs
 seed = args.seed
 
 assert method in ["snbo", "bo", "turbo", "ibnn", "dycors"], "invalid method"
-assert len(neurons) == len(act_funcs)
+if neurons is not None or act_funcs is not None:
+    assert isinstance(neurons, list) and isinstance(act_funcs, list)
+    assert len(neurons) == len(act_funcs)
 
 ########## setup directory for storing results
 
@@ -89,12 +91,22 @@ elif method == "turbo":
 
     from turbo import Turbo
 
+    if problem == "wing":
+        data = loadmat(f"wing_problem_files/initial_data{seed}.mat")
+        initial_x=data["x"]
+        initial_y=data["obj"]
+    else:
+        initial_x=None
+        initial_y=None
+
     optimizer = Turbo(
         f=f,
         lb=f.lb,
         ub=f.ub,
         n_init=n_init,
         max_evals=max_evals,
+        initial_x=initial_x,
+        initial_y=initial_y
     )
 
 elif method == "dycors":
