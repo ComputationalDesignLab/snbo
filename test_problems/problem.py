@@ -1,8 +1,4 @@
 import numpy as np
-from .analytical_problems import *
-from .rover import Rover
-from .mujoco_env import HalfCheetah
-from .wing import Wing
 
 class TestProblem():
 
@@ -35,24 +31,31 @@ class TestProblem():
             assert isinstance(seed, int), "seed should be an integer value"
 
         if func_name.lower() == "hartmann6d":
+            from .analytical_problems import Hartmann6D
             self.func = Hartmann6D()
 
         elif func_name.lower() == "ackley":
+            from .analytical_problems import Ackley
             self.func = Ackley(dim)
 
         elif func_name.lower() == "levy":
+            from .analytical_problems import Levy
             self.func = Levy(dim)
         
         elif func_name.lower() == "rastrigin":
+            from .analytical_problems import Rastrigin
             self.func = Rastrigin(dim)
 
         elif func_name.lower() == "rover":
+            from .rover import Rover
             self.func = Rover(dim)
 
         elif func_name.lower() == "halfcheetah":
+            from .mujoco_env import HalfCheetah
             self.func = HalfCheetah()
 
         elif func_name.lower() == "wing":
+            from .wing import Wing
             self.func = Wing(seed)
 
         else:
