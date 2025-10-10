@@ -79,12 +79,22 @@ elif method == "ibnn":
 
     from algorithms.ibnn import IBNN
 
+    if problem == "wing":
+        data = loadmat(f"wing_problem_files/initial_data{seed}.mat")
+        initial_x=data["x"]
+        initial_y=-data["obj"] # minus since IBNN maximizes
+    else:
+        initial_x=None
+        initial_y=None
+
     optimizer = IBNN(
         f=f,
         lb=f.lb,
         ub=f.ub,
         n_init=n_init,
         max_evals=max_evals,
+        initial_x=initial_x,
+        initial_y=initial_y
     )
 
 elif method == "turbo":
