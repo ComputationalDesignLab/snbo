@@ -67,14 +67,24 @@ if method == "bo":
 
     from algorithms.bo import BO
 
+    if problem == "wing":
+        data = loadmat(f"wing_problem_files/initial_data{seed}.mat")
+        initial_x=data["x"]
+        initial_y=-data["obj"] # minus since BO maximizes
+    else:
+        initial_x=None
+        initial_y=None
+
     optimizer = BO(
         f=f,
         lb=f.lb,
         ub=f.ub,
         n_init=n_init,
         max_evals=max_evals,
+        initial_x=initial_x,
+        initial_y=initial_y
     )
-    
+
 elif method == "ibnn":
 
     from algorithms.ibnn import IBNN

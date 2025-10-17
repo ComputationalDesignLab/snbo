@@ -34,7 +34,9 @@ class BO:
         restarts = 10,
         raw_samples = 512,
         device="cpu",
-        dtype="float64"
+        dtype="float64",
+        initial_x=None,
+        initial_y=None
     ):
         """
             Class for setting up and running the BO algorithm
@@ -81,12 +83,19 @@ class BO:
         assert max_evals > n_init and max_evals > batch_size
         assert device == "cpu" or device == "cuda"
         assert dtype == "float32" or dtype == "float64"
+        if initial_x is not None or initial_y is not None:
+            assert isinstance(initial_x,np.ndarray) and initial_x.ndim == 2
+            assert isinstance(initial_y,np.ndarray) and initial_y.ndim == 2
+            assert initial_x.shape[0] == initial_y.shape[0]
+            assert initial_y.shape[1] == 1
 
         # Save objective function information
         self.f = f
         self.dim = len(lb)
         self.lb = lb
         self.ub = ub
+        self.initial_x = initial_x
+        self.initial_y = initial_y
 
         # Settings
         self.n_init = n_init
@@ -114,8 +123,13 @@ class BO:
             Method to run the optimization loop
         """
 
-        self.X = latin_hypercube(self.n_init, self.dim) # initial doe in [0,1]^d
-        self.fX = self.f(self.X)
+        # Generate initial samples
+        if self.initial_x is None and self.initial_y is None:
+            self.X = latin_hypercube(self.n_init, self.dim) # initial doe in [0,1]^d
+            self.fX = self.f(self.X)
+        else:
+            self.X = self.initial_x
+            self.fX = self.initial_y
 
         # Update budget
         self.n_evals += self.n_init
