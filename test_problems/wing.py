@@ -17,7 +17,7 @@ class Wing():
             "smoother": "DADI",
             "MGCycle": "sg",
             "nsubiterturb": 10,
-            "nCycles": 7000,
+            "nCycles": 2000,
             # ANK Solver Parameters
             "useANKSolver": True,
             "ANKSubspaceSize": 400,
@@ -50,7 +50,7 @@ class Wing():
             "ffdFile": "wing_problem_files/ffd.xyz",
             "liftIndex": 3, # Very important
             "aeroProblem": ap,
-            "noOfProcessors": 10,
+            "noOfProcessors": 8,
             "sliceLocation": [0.14, 2.33, 4.67, 7.0, 9.33, 11.67, 13.86],
             "writeLiftDistribution": True,
             "writeDeformedFFD": True,
