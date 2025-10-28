@@ -131,6 +131,14 @@ elif method == "turbo":
 
 elif method == "dycors":
 
+    # initial doe
+    if problem == "wing":
+        data = loadmat(f"wing_problem_files/initial_data{seed}.mat")
+        x0=data["x"]
+        y0=data["obj"]
+    else:
+        x0 = latin_hypercube(n_init, f.dim)
+
     from DyCors import minimize
 
     # options for dycors - from original source code
@@ -147,9 +155,6 @@ elif method == "dycors":
         "nits_loo": 40, # optimize interal paramters of the kernel after these many iterations
         "warnings": False
     }
-
-    # initial doe
-    x0 = latin_hypercube(n_init, f.dim)
 
 elif method == "snbo":
 
@@ -183,8 +188,25 @@ try:
 
     if method != "dycors":
         optimizer.optimize()
+
     else:
-        obj_func = lambda x: f(x).item()
+
+        if problem == "wing":
+
+            def obj_func(x):
+                """
+                    Input must be a single array
+                """
+
+                idx = np.where((x0 == x).all(axis=1))[0]
+
+                if len(idx) != 0:
+                    return y0[idx[0],0].item()
+                else:
+                    return f(x).item()
+
+        else:
+            obj_func = lambda x: f(x).item()
         
         # optimize the problem
         solf = minimize(
