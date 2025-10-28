@@ -21,6 +21,7 @@ This repository also contains following test problems:
 - [Levy function](https://www.sfu.ca/~ssurjano/levy.html)
 - [Rover trajectory optimization](https://github.com/zi-w/Ensemble-Bayesian-Optimization/blob/master/test_functions/rover_function.py)
 - [Half-Cheetah problem](https://gymnasium.farama.org/environments/mujoco/half_cheetah/)
+- Wing shape optimization
 
 ## 🛠 Installation
 
@@ -50,6 +51,17 @@ cd DyCors
 pip install .
 ```
 
+### Wing problem additional packages
+
+To run the wing shape optimization problem, additional packages need to be installed. Following is a list of required packages for the wing problem:
+
+| Package   | Version | Description                                                                   |
+| --------- | ------- | ----------------------------------------------------------------------------- |
+| ADflow    | 2.11.0  | CFD solver for solving the flow around the wing, and compute drag and lift coefficients |
+| pyGeo     | 1.17.0  | parametrizing the wing shape using FFD method and compute wing volume |
+| IDWarp    | 2.6.2   | used for manipulating the CFD mesh based on wing shape changes |
+| blackbox  | 0.9.0   | provides a standard interface for evaluating the wing problem |
+
 ## ▶️ Running examples
 
 > 📥 Important: Before running any example, download the latest released or tagged version of this repository from the [releases page](https://github.com/ComputationalDesignLab/snbo/releases).
@@ -59,7 +71,7 @@ The main file for running experiments is `optimize.py`, found in algorithms fold
 | Argument    | Type | Description                                                                   |
 | ----------- | ---- | ----------------------------------------------------------------------------- |
 | `method`    | str  | Optimization method: `"bo"`, `"ibnn"`, `"turbo"`, `"dycors"`, `"snbo"`        |
-| `problem`   | str  | Test problem: `"ackley"`, `"rastrigin"`, `"levy"`, `"rover"`, `"halfcheetah"` |
+| `problem`   | str  | Test problem: `"ackley"`, `"rastrigin"`, `"levy"`, `"rover"`, `"halfcheetah"`, `"wing"` |
 | `dim`       | int  | Dimensionality of the problem                                                 |
 | `n_init`    | int  | Number of initial samples                                                     |
 | `max_evals` | int  | Maximum number of function evaluations                                        |
@@ -103,15 +115,14 @@ subfoler that contains entire optimization history.
 
 ## 📊 Results from paper
 
-To reproduce the data reported in the paper, you can use ``paper_results.sh`` script. Use the following command to run this script:
+To reproduce the data reported in the paper, various scripts have been provided in the runscripts/paper_results folder.
+Refer to the scripts for more details. Following command can be used for running a problem:
 
 ```
-bash runscripts/paper_results.sh
+bash runscripts/paper_results/ackley.sh
 ```
 
-For each seed value, this script loops through each problem and solves it using all the methods.
-
-> ⏳ **Warning**: This script will take a long time to run, depending on the resources used
+> ⏳ **Warning**: This script will might a long time to run, depending on the runs and resources used.
 
 ## 	🧾 Citation
 
