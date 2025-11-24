@@ -2,7 +2,7 @@
 
 This repository provides implementation for SNBO (Scalable Neural Network-based Blackbox Optimization) — a novel method for efficient blackbox optimization using neural networks. It also includes code for benchmark algorithms and a suite of test problems used in the paper.
 
-> 📝 **Note**: This work is currently under review but a preprint version is available at: https://arxiv.org/abs/2508.03827
+> 📝 **Note**: This work is published in Structural and Multidisciplinary Optimization: https://doi.org/10.1007/s00158-025-04195-5
 
 ## 📌 Features
 
@@ -57,10 +57,10 @@ To run the wing shape optimization problem, additional packages need to be insta
 
 | Package   | Version | Description                                                                   |
 | --------- | ------- | ----------------------------------------------------------------------------- |
-| ADflow    | 2.11.0  | CFD solver for solving the flow around the wing, and compute drag and lift coefficients |
-| pyGeo     | 1.17.0  | parametrizing the wing shape using FFD method and compute wing volume |
-| IDWarp    | 2.6.2   | used for manipulating the CFD mesh based on wing shape changes |
-| blackbox  | 0.9.0   | provides a standard interface for evaluating the wing problem |
+| [ADflow](https://github.com/mdolab/adflow)  | 2.11.0  | CFD solver for solving the flow around the wing, and compute drag and lift coefficients |
+| [pyGeo](https://github.com/mdolab/pygeo)     | 1.17.0  | parametrizing the wing shape using FFD method and compute wing volume |
+| [IDWarp](https://github.com/mdolab/idwarp)    | 2.6.2   | used for manipulating the CFD mesh based on wing shape changes |
+| [blackbox](https://github.com/ComputationalDesignLab/blackbox)  | 0.9.0   | provides a standard interface for evaluating the wing problem |
 
 ## ▶️ Running examples
 
@@ -126,4 +126,18 @@ bash runscripts/paper_results/ackley.sh
 
 ## 	🧾 Citation
 
-If you use SNBO method in your research, please cite the original work (citation coming soon, paper under review).
+If you use SNBO method in your research, please cite the original work:
+
+```
+@article{snbo,
+  title = {Scalable neural network-based blackbox optimization},
+  volume = {68},
+  DOI = {10.1007/s00158-025-04195-5},
+  number = {12},
+  journal = {Structural and Multidisciplinary Optimization},
+  publisher = {Springer Science and Business Media LLC},
+  author = {Koratikere, Pavankumar and Leifsson, Leifur},
+  year = {2025},
+  month = nov 
+}
+```
